@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import 'package:get_flutter_starter/services/auth/authentication_manager.dart';
+import 'package:get_flutter_starter/domain/services/manager/authentication_manager.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);

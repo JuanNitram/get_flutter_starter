@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:get_flutter_starter/request_models/login_request_model.dart';
-import 'package:get_flutter_starter/request_models/register_request_model.dart';
-import 'package:get_flutter_starter/services/auth/authentication_manager.dart';
-import 'package:get_flutter_starter/services/auth/login_manager.dart';
+import 'package:get_flutter_starter/domain/requests/login_request_model.dart';
+import 'package:get_flutter_starter/domain/requests/register_request_model.dart';
+
+import 'package:get_flutter_starter/domain/services/manager/authentication_manager.dart';
+import 'package:get_flutter_starter/domain/services/auth/auth_service.dart';
 
 class LoginViewModel extends GetxController {
-  late final LoginManager _loginManager;
+  late final AuthService _authService;
   late final AuthenticationManager _authManager;
 
   @override
   void onInit() {
     super.onInit();
-    _loginManager = Get.put(LoginManager());
+    _authService = Get.put(AuthService());
     _authManager = Get.find();
   }
 
   Future<void> loginUser(String email, String password) async {
-    final response = await _loginManager
+    final response = await _authService
         .fetchLogin(LoginRequestModel(email: email, password: password));
 
     if (response != null) {
@@ -37,7 +38,7 @@ class LoginViewModel extends GetxController {
   }
 
   Future<void> registerUser(String email, String password) async {
-    final response = await _loginManager
+    final response = await _authService
         .fetchRegister(RegisterRequestModel(email: email, password: password));
 
     if (response != null) {
